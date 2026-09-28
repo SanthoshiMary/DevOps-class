@@ -1,0 +1,358 @@
+DEVOPS DAY 3 – DOCKER PRACTICE
+
+OVERVIEW
+--------
+
+Today I practiced Docker container management, running Apache HTTPD containers,
+port mapping, accessing containers, creating images from containers, saving and
+loading Docker images, and building a custom Docker image using a Dockerfile.
+
+The practical commands executed today are documented below.
+
+------------------------------------------------------------
+1. DOCKER CONTAINER MANAGEMENT
+------------------------------------------------------------
+
+I practiced starting an existing HTTPD container and checking all containers.
+
+Commands practiced:
+
+    docker start httpd
+    docker ps -a
+
+I also practiced creating a container named "democon".
+
+    docker create -d --name democon httpd
+    docker create --name democon httpd
+    docker start democon
+    docker ps
+
+I practiced stopping and removing the container.
+
+    docker stop democon
+    docker ps
+    docker rm democon
+    docker ps -a
+
+I also practiced starting and removing containers using their container IDs.
+
+    docker start d1de6f46710c
+    docker start 70f58000073e
+    docker ps
+    docker rm 70f58000073e
+    docker rm -f 70f58000073e
+    docker ps -a
+
+NOTE:
+Some commands were repeated during practice. The repeated commands are kept
+here because they represent the commands I actually executed.
+
+
+
+------------------------------------------------------------
+2. RUNNING HTTPD CONTAINERS
+------------------------------------------------------------
+
+I practiced running the Apache HTTPD image as a container.
+
+    docker run -d --name sji-dev httpd
+
+I also practiced running a container without detached mode and then starting it.
+
+    docker run --name demo httpd
+    docker start demo
+    docker ps -a
+
+The -d option was practiced for running a container in detached/background mode.
+
+------------------------------------------------------------
+3. ACCESSING A RUNNING CONTAINER
+------------------------------------------------------------
+
+I practiced opening an interactive Bash shell inside the running container.
+
+    docker exec -it sji-dev /bin/bash
+
+The same command was executed multiple times during practice.
+
+I also used:
+
+    docker exec -it test /bin/bash
+
+and later:
+
+    docker exec -it task /bin/bash
+
+This helped me practice entering a running Docker container and working
+inside its environment.
+
+
+
+------------------------------------------------------------
+4. PORT MAPPING WITH APACHE HTTPD
+------------------------------------------------------------
+
+I practiced mapping a host port to the Apache HTTPD container port.
+
+First I tried port 8082:
+
+    docker run -d --name demo -p 8082:80 httpd
+    docker run -d --name test -p 8082:80 httpd
+
+The important format is:
+
+    -p HOST_PORT:CONTAINER_PORT
+
+I then created the container named "task" using port 82:
+
+    docker run -d --name task -p 82:80 httpd
+
+I accessed the container using:
+
+    docker exec -it task /bin/bash
+
+This was the main Apache port-mapping practice for the day.
+
+
+------------------------------------------------------------
+5. CREATING AN IMAGE FROM A CONTAINER
+------------------------------------------------------------
+
+I created a new Docker image from the "task" container.
+
+    docker commit task snapimg:1.0
+
+Then I checked the available Docker images.
+
+    docker images
+
+I also created containers from the new image using port 8083.
+
+    docker run -d --name demo -p 8083:80 snapimg:1.0
+    docker run -d --name demoo -p 8083:80 snapimg:1.0
+
+This demonstrated how a container can be used to create a new Docker image
+and how that image can then be used to create another container.
+
+------------------------------------------------------------
+6. SAVING A DOCKER IMAGE AS A TAR FILE
+------------------------------------------------------------
+
+I practiced saving the Docker image as a TAR backup file.
+
+First:
+
+    docker save snapimg:1.0 > demobackup.tar
+
+I checked the files in the current directory:
+
+    ls
+
+I then used the -o option:
+
+    docker save -o sjibackup.tar snapimg:1.0
+
+Again, I checked the directory:
+
+    ls
+
+The image was therefore saved as a TAR file for backup/transfer.
+
+
+------------------------------------------------------------
+7. REMOVING AND RESTORING A DOCKER IMAGE
+------------------------------------------------------------
+
+I practiced removing the Docker image:
+
+    docker rmi snapimg:1.0
+
+I also practiced force removal:
+
+    docker rmi -f snapimg:1.0
+
+After removing the image, I restored it from the saved TAR file:
+
+    docker load -i sjibackup.tar
+
+Then I checked the restored image:
+
+    docker images
+
+This demonstrated the image backup and restore process.
+
+
+
+------------------------------------------------------------
+8. DOCKERFILE AND CUSTOM IMAGE
+------------------------------------------------------------
+
+I practiced viewing and editing files used for building a custom Docker image.
+
+Commands executed:
+
+    explorer .
+    cat dockerfile.txt
+    notepad index.html
+    cat dockerfile
+    notepad dockerfile
+
+I then built the custom image:
+
+    docker build -t customimg:latest .
+
+I repeated the build process while modifying/checking the Dockerfile.
+
+Finally, I checked the available images:
+
+    docker images
+
+The image created was:
+
+    customimg:latest
+
+
+
+------------------------------------------------------------
+9. RUNNING THE CUSTOM IMAGE
+------------------------------------------------------------
+
+After building the custom image, I created a container from it.
+
+    docker run -d --name filetest -p 8081:80 customimg
+
+The host port 8081 was mapped to the container's port 80.
+
+This allowed the custom image to be tested through the browser.
+
+
+
+------------------------------------------------------------
+10. COMPLETE PRACTICAL FLOW
+------------------------------------------------------------
+
+The main workflow practiced today was:
+
+    HTTPD IMAGE
+        |
+        v
+    CREATE / RUN CONTAINER
+        |
+        v
+    ACCESS CONTAINER
+        |
+        v
+    PORT MAPPING
+        |
+        v
+    MODIFY / TEST CONTAINER
+        |
+        v
+    docker commit
+        |
+        v
+    CREATE CUSTOM IMAGE
+        |
+        v
+    docker save
+        |
+        v
+    TAR BACKUP
+        |
+        v
+    docker load
+        |
+        v
+    RESTORED IMAGE
+        |
+        v
+    Dockerfile
+        |
+        v
+    docker build
+        |
+        v
+    CUSTOM IMAGE
+        |
+        v
+    RUN CUSTOM CONTAINER
+
+------------------------------------------------------------
+KEY DOCKER COMMANDS PRACTICED
+------------------------------------------------------------
+
+Container management:
+
+    docker ps
+    docker ps -a
+    docker start <container>
+    docker stop <container>
+    docker rm <container>
+    docker rm -f <container>
+
+Creating and running containers:
+
+    docker create --name <name> <image>
+    docker run -d --name <name> <image>
+
+Entering a container:
+
+    docker exec -it <container> /bin/bash
+
+Port mapping:
+
+    docker run -d --name <name> -p <host-port>:<container-port> <image>
+
+Creating an image:
+
+    docker commit <container> <image>:<tag>
+
+Checking images:
+
+    docker images
+
+Saving an image:
+
+    docker save <image>:<tag> > <backup>.tar
+    docker save -o <backup>.tar <image>:<tag>
+
+Removing an image:
+
+    docker rmi <image>:<tag>
+    docker rmi -f <image>:<tag>
+
+Loading an image:
+
+    docker load -i <backup>.tar
+
+Building an image:
+
+    docker build -t <image>:<tag> .
+
+------------------------------------------------------------
+DAY 3 OUTCOME
+------------------------------------------------------------
+
+By the end of Day 3, I practiced:
+
+1. Docker container creation and management
+2. Starting and stopping containers
+3. Removing containers
+4. Running containers in detached mode
+5. Accessing a running container using docker exec
+6. Running Apache HTTPD containers
+7. Mapping host ports to container port 80
+8. Creating a Docker image using docker commit
+9. Saving Docker images as TAR files
+10. Removing and restoring Docker images
+11. Creating and editing a Dockerfile
+12. Building a custom Docker image
+13. Running a container from the custom image
+14. Testing the custom image through a mapped port
+
+------------------------------------------------------------
+NOTE
+------------------------------------------------------------
+
+The commands above are based on the commands executed during today's practice.
+Repeated commands are included where they appeared in the command history.
