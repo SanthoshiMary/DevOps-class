@@ -1,0 +1,430 @@
+DAY 4 – DOCKER NETWORKING, DOCKER COMPOSE, JAVA/JDK, JENKINS AND DOCKERFILE
+
+1. DOCKER NETWORK MANAGEMENT
+
+Docker networks are used to allow Docker containers to communicate with each other.
+
+Commands used:
+
+docker network ls
+
+This command is used to list the available Docker networks.
+
+Created a custom Docker network:
+
+docker network create sji-demonet
+
+Checked the networks again:
+
+docker network ls
+
+
+2. DOCKER SYSTEM CLEANUP
+
+Docker provides commands to remove unused Docker resources.
+
+Checked running and stopped containers:
+
+docker ps -a
+
+Checked available Docker images:
+
+docker images
+
+Removed unused Docker resources:
+
+docker system prune
+
+Used the following command for a more complete cleanup:
+
+docker system prune -a
+
+Checked the available networks again:
+
+docker network ls
+
+
+3. RUNNING A CONTAINER USING A CUSTOM NETWORK
+
+A Docker container can be connected to a specific Docker network while creating it.
+
+The correct command used was:
+
+docker run -d --name demo -p 8081:80 --network sji-demonet customimg
+
+The container was then checked using:
+
+docker ps
+
+The container configuration was inspected using:
+
+docker inspect demo
+
+
+4. CHECKING DOCKER IMAGES
+
+Checked the custom Docker image:
+
+docker images customimg
+
+Also checked all available images:
+
+docker images
+
+
+5. BUILDING THE CUSTOM IMAGE AGAIN
+
+Moved to the Dockerfile directory:
+
+cd "C:\Users\santh\dockerfile"
+
+Built the Docker image:
+
+docker build -t customimg:latest .
+
+Checked the image:
+
+docker images
+
+
+6. CREATING ANOTHER DOCKER NETWORK
+
+Created another custom network:
+
+docker network create test
+
+Checked the available networks:
+
+docker network ls
+
+
+7. RUNNING A CONTAINER ON THE TEST NETWORK
+
+Started a container using the custom image and connected it to the test network:
+
+docker run -d --name papu -p 8081:80 --network test customimg
+
+Checked the running containers:
+
+docker ps
+
+
+8. INSPECTING CONTAINERS
+
+Inspected the demo container:
+
+docker inspect demo
+
+Inspected the papu container:
+
+docker inspect papu
+
+Docker inspect is used to view detailed information about a container, including its network configuration, IP address, ports and other settings.
+
+
+9. DOCKER COMPOSE
+
+Docker Compose is used to define and manage multiple Docker services using a YAML configuration file.
+
+Created/checked the Docker Compose file:
+
+docker-compose.yaml
+
+Checked the Docker Compose version:
+
+docker compose version
+
+Displayed the contents of the Compose file:
+
+cat docker-compose.yaml
+
+Checked all containers:
+
+docker ps -a
+
+
+10. STARTING SERVICES USING DOCKER COMPOSE
+
+Started the services using:
+
+docker compose up
+
+Checked the running containers:
+
+docker ps
+
+Stopped the papu container:
+
+docker stop papu
+
+Started the Compose services in detached mode:
+
+docker compose up -d
+
+Checked the running containers again:
+
+docker ps
+
+
+11. INSPECTING A FRONTEND CONTAINER
+
+Inspected the frontend container:
+
+docker inspect frontend
+
+This was used to check the configuration and details of the frontend container.
+
+
+12. STOPPING DOCKER COMPOSE SERVICES
+
+Stopped and removed the Compose services using:
+
+docker compose down
+
+Checked the containers:
+
+docker ps -a
+
+
+13. CREATING A FRONTEND DIRECTORY
+
+Created a frontend directory:
+
+mkdir frontend
+
+Moved into the frontend directory:
+
+cd frontend
+
+Checked the contents:
+
+ls
+
+Created the frontend HTML file:
+
+notepad index.html
+
+Checked the contents of the directory:
+
+ls
+
+
+14. RUNNING THE FRONTEND USING DOCKER COMPOSE
+
+Started the Docker Compose services:
+
+docker compose up
+
+Checked the running containers:
+
+docker ps
+
+Moved back to the parent directory:
+
+cd ..
+
+Edited the Docker Compose file:
+
+notepad docker-compose.yaml
+
+
+15. CHECKING DOCKER COMPOSE SERVICES AND IMAGES
+
+Checked the Compose services:
+
+docker compose ps
+
+Checked available Docker images:
+
+docker images
+
+Checked images used by Docker Compose:
+
+docker compose images
+
+Stopped and removed the Compose services:
+
+docker compose down
+
+
+16. JAVA/JDK INSTALLATION FOR JENKINS
+
+Installed Java/JDK as a prerequisite for Jenkins.
+
+After installation, the Java/JDK setup was completed successfully.
+
+The Java/JDK installation was required before installing Jenkins.
+
+
+17. JENKINS INSTALLATION
+
+Installed Jenkins after completing the Java/JDK setup.
+
+The Jenkins installation was completed successfully.
+
+At this stage, only the Jenkins installation was required. Opening and configuring the Jenkins dashboard in the browser was not part of this task.
+
+
+18. NODE.JS RESOURCE FILE CREATION
+
+Created a simple Node.js application as the resource file for the Dockerfile task.
+
+The Node.js resource file was created first so that it could be copied into the Docker image.
+
+The resource file and Dockerfile were kept together in the working directory.
+
+
+19. CREATING THE DOCKERFILE
+
+Created a Dockerfile for the Node.js application.
+
+The Dockerfile contains the instructions required to create a Docker image for the Node.js application.
+
+The Dockerfile was created without any file extension.
+
+The Dockerfile and Node.js resource file were kept in the same project directory.
+
+
+20. BUILDING THE DOCKER IMAGE
+
+After creating the Dockerfile, the Docker image was built to check whether the Dockerfile was working correctly.
+
+The Docker image was successfully built.
+
+This confirmed that the Dockerfile and the required resource file could be used to create a Docker image.
+
+
+21. RUNNING AND TESTING THE DOCKER CONTAINER
+
+After successfully building the Docker image, a container was created from the image.
+
+The container was started and the Node.js application was tested.
+
+This confirmed that the Docker image could be used to run the application successfully.
+
+
+22. ADDING THE DOCKERFILE AND RESOURCE FILE TO GIT
+
+After successfully testing the Docker image and container, the Dockerfile and Node.js resource file were added to the existing Git repository.
+
+Checked the Git status:
+
+git status
+
+Added the required files:
+
+git add Dockerfile app.js
+
+
+23. COMMITTING THE DOCKERFILE TASK
+
+Committed the Dockerfile and Node.js resource file to Git.
+
+The changes were committed with a suitable commit message.
+
+Example:
+
+git commit -m "Add Dockerfile and Node.js resource file"
+
+
+24. PUSHING THE CHANGES TO GITHUB
+
+The committed changes were pushed to the existing GitHub repository.
+
+The Dockerfile and Node.js resource file were successfully uploaded to GitHub.
+
+The final repository contains the required files for the Dockerfile task.
+
+
+25. FINAL DOCKERFILE TASK FLOW
+
+The complete workflow followed for the Dockerfile task was:
+
+Create Node.js resource file
+        ↓
+Create Dockerfile
+        ↓
+Build Docker image
+        ↓
+Check whether image builds successfully
+        ↓
+Run the container
+        ↓
+Test the application
+        ↓
+Check Git status
+        ↓
+Add Dockerfile and resource file
+        ↓
+Commit the changes
+        ↓
+Push to GitHub
+        ↓
+Verify files in GitHub
+
+
+26. KEY LEARNINGS
+
+- Learned how to list and create Docker networks.
+- Learned how to connect containers to custom Docker networks.
+- Learned about Docker system cleanup.
+- Learned how to inspect Docker containers.
+- Learned how to build and check Docker images.
+- Learned the basics of Docker Compose.
+- Learned how to start and stop services using Docker Compose.
+- Learned how to create and use a frontend directory with Docker Compose.
+- Installed Java/JDK as a prerequisite for Jenkins.
+- Installed Jenkins.
+- Learned how to create a Dockerfile.
+- Learned how to create a Node.js resource file for a Docker application.
+- Learned how to build a Docker image using a Dockerfile.
+- Learned how to run and test a container created from the image.
+- Learned how to add Dockerfile-related files to Git.
+- Learned how to commit changes in Git.
+- Learned how to push the committed files to GitHub.
+- Learned the complete workflow from creating an application resource file to deploying its Dockerfile and source files to GitHub.
+
+
+27. DAY 4 PRACTICE FLOW
+
+Docker Network
+        ↓
+Create Custom Network
+        ↓
+Docker System Cleanup
+        ↓
+Run Container on Custom Network
+        ↓
+Inspect Container
+        ↓
+Build Custom Docker Image
+        ↓
+Docker Compose
+        ↓
+Create Frontend Directory
+        ↓
+Run Frontend Using Compose
+        ↓
+Inspect Compose Container
+        ↓
+Stop Compose Services
+        ↓
+Install Java/JDK
+        ↓
+Install Jenkins
+        ↓
+Create Node.js Resource File
+        ↓
+Create Dockerfile
+        ↓
+Build Docker Image
+        ↓
+Run and Test Container
+        ↓
+Git Add
+        ↓
+Git Commit
+        ↓
+Git Push
+        ↓
+Verify Dockerfile and Resource File in GitHub
