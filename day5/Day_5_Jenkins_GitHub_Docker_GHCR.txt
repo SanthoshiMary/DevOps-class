@@ -1,0 +1,199 @@
+DAY 5 – JENKINS, GITHUB, DOCKER AND GHCR INTEGRATION
+
+Objective
+
+The main objective of Day 5 was to understand how Jenkins can be
+integrated with GitHub and Docker to automate the process of obtaining
+source code, building a Docker image, and running a Docker container. I
+also learned how a Docker image can be stored in GitHub Container
+Registry (GHCR) and pulled when required.
+
+Tools Used
+
+-   GitHub – Source code repository
+-   Jenkins – Continuous Integration tool
+-   Docker – Containerization platform
+-   GitHub Container Registry (GHCR) – Storage for Docker images
+-   Windows environment – Jenkins and Docker execution environment
+
+1.  GitHub and Jenkins Integration
+
+A Jenkins job named:
+
+demo-integration-git-docker
+
+was created and connected to the GitHub repository.
+
+Jenkins was used to fetch the project files from the GitHub repository
+into its workspace.
+
+The Jenkins workspace contained files such as:
+
+-   app.js
+-   Dockerfile
+-   day2.txt
+-   initial.txt
+-   rebasefile
+
+This helped me understand how Jenkins can automatically obtain the
+latest project files from GitHub before performing the build process.
+
+2.  Jenkins Build and Workspace
+
+The Jenkins job was executed multiple times during the setup and testing
+process.
+
+The Jenkins dashboard showed the build history, including successful and
+failed builds. Build #12 was successfully completed.
+
+The Jenkins workspace confirmed that the files from the GitHub
+repository were available to Jenkins.
+
+This demonstrated the basic Continuous Integration workflow:
+
+GitHub Repository → Jenkins → Workspace
+
+3.  Docker Integration with Jenkins
+
+Docker commands were added to the Jenkins job under Build Steps.
+
+The following Windows batch commands were used:
+
+dir
+
+docker build -t jenkinstest .
+
+docker images
+
+docker run -d –name jenkinstestcont -p 8084:80 jenkinstest
+
+The purpose of these steps was:
+
+-   dir – To check the files available in the Jenkins workspace.
+-   docker build -t jenkinstest . – To build a Docker image using the
+    Dockerfile in the workspace.
+-   docker images – To verify that the Docker image was created
+    successfully.
+-   docker run -d –name jenkinstestcont -p 8084:80 jenkinstest – To
+    create and run a container from the image and map port 8084 of the
+    host to port 80 of the container.
+
+Therefore, Jenkins was used to automate the Docker image creation and
+container execution process.
+
+4.  Docker Image
+
+After the Docker build, the image named:
+
+jenkinstest:latest
+
+was created.
+
+The Docker image was also tagged with the GHCR repository name:
+
+ghcr.io/santhoshimary/jenkinstest:latest
+
+The local Docker environment showed both the local image and the
+GHCR-tagged image. Both referenced the same image ID:
+
+73027eaa5784
+
+and the image size was approximately 1.57 GB.
+
+5.  GitHub Container Registry (GHCR)
+
+I learned how GitHub Container Registry can be used to store Docker
+images.
+
+The Docker image was pushed to:
+
+ghcr.io/santhoshimary/jenkinstest:latest
+
+The image was available under the GitHub Packages section of the
+account.
+
+The GHCR package was named:
+
+jenkinstest
+
+and the latest image version was available in the package.
+
+6.  Pulling the Docker Image from GHCR
+
+The GHCR package page provided the command required to pull the image:
+
+docker pull ghcr.io/santhoshimary/jenkinstest:latest
+
+This showed how a Docker image stored in GHCR can be downloaded to a
+Docker environment when required.
+
+The basic process is:
+
+GHCR → docker pull → Local Docker Image
+
+7.  Running the Docker Container
+
+The Docker image was used to create a running container using:
+
+docker run -d –name jenkinstestcont -p 8084:80 jenkinstest
+
+Here:
+
+-   -d runs the container in detached mode.
+-   –name jenkinstestcont assigns a name to the container.
+-   -p 8084:80 maps host port 8084 to container port 80.
+-   jenkinstest is the Docker image used to create the container.
+
+This allowed the application inside the Docker container to be accessed
+through the mapped port.
+
+8.  Overall Workflow
+
+The complete workflow learned on Day 5 was:
+
+GitHub ↓ Jenkins ↓ Jenkins Workspace ↓ Docker Build ↓ Docker Image ↓
+GHCR ↓ Docker Pull ↓ Local Docker ↓ Docker Container
+
+9.  Key Learnings
+
+-   Learned the basic integration of Jenkins with GitHub.
+-   Learned how Jenkins retrieves project files into its workspace.
+-   Learned how to configure Windows batch commands as Jenkins build
+    steps.
+-   Learned how Jenkins can execute Docker commands.
+-   Learned how to build a Docker image using a Dockerfile.
+-   Learned how to run a Docker container from the created image.
+-   Learned about GitHub Container Registry (GHCR).
+-   Learned how to store a Docker image in GHCR.
+-   Learned how to pull a Docker image from GHCR.
+-   Understood the basic Continuous Integration workflow using GitHub,
+    Jenkins and Docker.
+
+10. Screenshots Included
+
+The following screenshots can be added to the Day 5 documentation:
+
+1.  Jenkins Dashboard
+    -   Shows the demo-integration-git-docker Jenkins job and successful
+        build status.
+2.  Jenkins Workspace
+    -   Shows the files retrieved into the Jenkins workspace.
+3.  Jenkins Build Configuration
+    -   Shows the Docker-related build steps configured in Jenkins:
+        docker build docker images docker run
+4.  Docker Images
+    -   Shows the local jenkinstest image and the GHCR-tagged image.
+5.  GitHub Packages / GHCR
+    -   Shows the jenkinstest package stored in GitHub Container
+        Registry.
+    -   Shows the docker pull command provided by GHCR.
+
+Conclusion
+
+Day 5 helped me understand how GitHub, Jenkins and Docker can work
+together in a Continuous Integration workflow. Jenkins can retrieve the
+source code from GitHub and execute Docker commands automatically. I
+also learned how Docker images can be stored in GitHub Container
+Registry and pulled back into a Docker environment. This gave me
+practical knowledge of integrating source-code management, CI
+automation, containerization and container image storage.
