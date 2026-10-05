@@ -1,0 +1,234 @@
+DAY 6 – TERRAFORM AND AWS CONFIGURATION
+
+Overview
+--------
+
+On Day 6, I learned the basics of Terraform and worked with Amazon Web Services (AWS). I created an AWS account, created an IAM user for secure access, and configured AWS credentials using the Access Key and Secret Access Key.
+
+The main objective of this session was to understand Infrastructure as Code (IaC) using Terraform and to prepare AWS for working with Terraform.
+
+
+TOPICS LEARNED
+--------------
+
+1. Introduction to Terraform
+2. Infrastructure as Code (IaC)
+3. Basic Terraform workflow
+4. Creating an AWS account
+5. AWS IAM
+6. Creating an IAM user
+7. Access Key ID and Secret Access Key
+8. Configuring AWS credentials
+9. Terraform and AWS integration
+
+
+1. INTRODUCTION TO TERRAFORM
+----------------------------
+
+Terraform is an Infrastructure as Code (IaC) tool developed by HashiCorp.
+
+It allows us to create and manage infrastructure using configuration files instead of manually creating resources through the cloud provider's web console.
+
+Terraform can be used with cloud platforms such as AWS, Azure, and Google Cloud.
+
+
+2. INFRASTRUCTURE AS CODE (IaC)
+-------------------------------
+
+Infrastructure as Code means managing and creating infrastructure using code.
+
+Instead of manually creating cloud resources through a web console, we can define the required infrastructure in configuration files.
+
+Benefits of Infrastructure as Code:
+
+- Infrastructure can be created using code.
+- Configuration can be version controlled using Git.
+- Resources can be created consistently.
+- Infrastructure can be automated.
+- Manual work can be reduced.
+
+
+3. TERRAFORM WORKFLOW
+---------------------
+
+The basic Terraform workflow is:
+
+Write Configuration
+        |
+        v
+terraform init
+        |
+        v
+terraform plan
+        |
+        v
+terraform apply
+        |
+        v
+Infrastructure Created
+
+
+terraform init:
+Initializes the Terraform working directory and downloads the required provider plugins.
+
+terraform plan:
+Shows the changes Terraform is going to make before applying them.
+
+terraform apply:
+Applies the Terraform configuration and creates or modifies the required infrastructure.
+
+
+4. CREATING AN AWS ACCOUNT
+--------------------------
+
+I created an AWS account to work with AWS cloud services and Terraform.
+
+AWS provides many cloud services such as:
+
+- EC2
+- S3
+- IAM
+- VPC
+- RDS
+- CloudWatch
+
+For this task, AWS was mainly used to understand IAM and prepare the environment for Terraform.
+
+
+5. AWS IAM
+----------
+
+IAM stands for Identity and Access Management.
+
+AWS IAM is used to control who can access AWS resources and what actions they are allowed to perform.
+
+IAM can be used to manage:
+
+- Users
+- Groups
+- Roles
+- Permissions
+- Access Keys
+
+
+6. CREATING AN IAM USER
+-----------------------
+
+I created a separate IAM user for working with AWS instead of using the root account for regular tasks.
+
+The IAM user can be given the required permissions to access AWS resources.
+
+Using a separate IAM user allows permissions to be controlled independently.
+
+Basic flow:
+
+AWS Account
+     |
+     v
+    IAM
+     |
+     v
+Create IAM User
+     |
+     v
+Assign Required Permissions
+     |
+     v
+Create Access Credentials
+
+
+7. ACCESS KEY AND SECRET ACCESS KEY
+-----------------------------------
+
+After creating the IAM user, I configured credentials for programmatic access.
+
+The credentials included:
+
+- Access Key ID
+- Secret Access Key
+
+These credentials can be used by tools such as the AWS CLI and Terraform to authenticate with AWS.
+
+IMPORTANT:
+
+The Secret Access Key is sensitive information and should never be uploaded to GitHub or shared publicly.
+
+AWS credentials should always be stored securely.
+
+
+8. CONFIGURING AWS CREDENTIALS
+------------------------------
+
+I configured the AWS credentials in my local environment so that AWS-related tools can authenticate with my AWS account.
+
+The configuration allows tools running on my system to communicate with AWS.
+
+The overall flow is:
+
+IAM User
+    |
+    v
+Access Key ID + Secret Access Key
+    |
+    v
+AWS Configuration
+    |
+    v
+Local Machine
+    |
+    v
+Terraform / AWS CLI
+    |
+    v
+AWS Services
+
+
+9. TERRAFORM AND AWS INTEGRATION
+--------------------------------
+
+Terraform can use the AWS provider to communicate with AWS and manage AWS infrastructure.
+
+The basic concept is:
+
+Terraform
+    |
+    v
+AWS Provider
+    |
+    v
+AWS Credentials
+    |
+    v
+AWS Account
+    |
+    v
+AWS Resources
+
+Terraform configuration files can be used to define the AWS infrastructure that needs to be created and managed.
+
+
+WHAT I LEARNED
+--------------
+
+Through Day 6, I learned:
+
+1. What Terraform is and why it is used.
+2. What Infrastructure as Code means.
+3. The basic Terraform workflow.
+4. How to create an AWS account.
+5. What AWS IAM is.
+6. How to create an IAM user.
+7. The purpose of Access Key ID and Secret Access Key.
+8. How to configure AWS credentials.
+9. How Terraform can communicate with AWS.
+10. The importance of keeping AWS credentials secure.
+
+
+CONCLUSION
+----------
+
+Day 6 helped me understand the basics of Terraform, Infrastructure as Code, AWS IAM, and AWS authentication.
+
+I created an AWS account, created an IAM user, generated the required access credentials, and configured AWS access in my local environment.
+
+This setup provides the foundation for using Terraform to create and manage AWS resources through code in the upcoming tasks.
