@@ -1,0 +1,336 @@
+Started by user Santhoshi Mary A
+Running as SYSTEM
+Building in workspace C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker
+The recommended git tool is: NONE
+using credential Marys-Github
+ > git.exe rev-parse --resolve-git-dir C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker\.git # timeout=10
+Fetching changes from the remote Git repository
+ > git.exe config remote.origin.url https://github.com/SanthoshiMary/Devops-demo.git # timeout=10
+Fetching upstream changes from https://github.com/SanthoshiMary/Devops-demo.git
+ > git.exe --version # timeout=10
+ > git --version # 'git version 2.52.0.windows.1'
+using GIT_ASKPASS to set credentials 
+ > git.exe fetch --tags --force --progress -- https://github.com/SanthoshiMary/Devops-demo.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git.exe rev-parse "refs/remotes/origin/portfolio^{commit}" # timeout=10
+Checking out Revision 62aedd1df10f21458580f3e9d06616cdb47ebe60 (refs/remotes/origin/portfolio)
+ > git.exe config core.sparsecheckout # timeout=10
+ > git.exe checkout -f 62aedd1df10f21458580f3e9d06616cdb47ebe60 # timeout=10
+Commit message: "Create portfolio website with Dockerfile"
+ > git.exe rev-list --no-walk 62aedd1df10f21458580f3e9d06616cdb47ebe60 # timeout=10
+[demo-integration-git-docker] $ cmd /c call C:\WINDOWS\TEMP\jenkins8292737250583532884.bat
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>dir
+ Volume in drive C is Windows
+ Volume Serial Number is EA37-06AE
+
+ Directory of C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker
+
+05-10-2026  22:43    <DIR>          .
+30-09-2026  11:03    <DIR>          ..
+05-10-2026  22:43               136 Dockerfile
+05-10-2026  22:43            13,541 index.html
+05-10-2026  22:43            11,817 style.css
+               3 File(s)         25,494 bytes
+               2 Dir(s)  324,215,820,288 bytes free
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>docker build -t santhoshi-portfolio:latest . 
+#0 building with "default" instance using docker driver
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 175B 0.0s done
+#1 DONE 0.1s
+
+#2 [internal] load metadata for docker.io/library/nginx:alpine
+#2 DONE 2.2s
+
+#3 [internal] load .dockerignore
+#3 transferring context: 2B done
+#3 DONE 0.0s
+
+#4 [internal] load build context
+#4 transferring context: 61B 0.0s done
+#4 DONE 0.0s
+
+#5 [1/3] FROM docker.io/library/nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2
+#5 resolve docker.io/library/nginx:alpine@sha256:df221db836e1754089190208cee7eeda94f233197056426eda74a43ab1abeac2 0.1s done
+#5 DONE 0.1s
+
+#6 [2/3] COPY index.html /usr/share/nginx/html/index.html
+#6 CACHED
+
+#7 [3/3] COPY style.css /usr/share/nginx/html/style.css
+#7 CACHED
+
+#8 exporting to image
+#8 exporting layers done
+#8 exporting manifest sha256:0567c7d7ee91328e3bf1f0dd2471cacee372a93fb89a611a5f4725b1dc51154e done
+#8 exporting config sha256:4d66768f19614c23bfac7a0f6badfedb0731b504b83f5bd9e23ea851ea1cb8e7 done
+#8 exporting attestation manifest sha256:fe82a040f5afa2055e982abae0bdf59337a6c503caa4675b5062e452d5c9ffc2 0.0s done
+#8 exporting manifest list sha256:df8fb943506a743be3cc6b90c6e18a42fc83d6855428e34853c0e13c487e9be0 0.0s done
+#8 naming to docker.io/library/santhoshi-portfolio:latest done
+#8 unpacking to docker.io/library/santhoshi-portfolio:latest 0.0s done
+#8 DONE 0.3s
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>docker images 
+IMAGE                                              ID             DISK USAGE   CONTENT SIZE   EXTRA
+customimg:latest                                   7a843e7ad18e        213MB           62MB   U    
+ghcr.io/santhoshimary/jenkinstest:latest           73027eaa5784       1.58GB          398MB   U    
+ghcr.io/santhoshimary/santhoshi-portfolio:latest   f230a59330d4       93.6MB         26.3MB   U    
+httpd:2.4                                          03f858efb82c        177MB         47.6MB        
+jenkinstest:latest                                 73027eaa5784       1.58GB          398MB   U    
+my-node-app:latest                                 6594a5cda57c       1.58GB          398MB        
+mysql:8.0                                          7dcddc01f13b        1.1GB          249MB        
+php:8.2-apache                                     a5ca3797b19e        715MB          183MB        
+santhoshi-portfolio:latest                         df8fb943506a       93.6MB         26.3MB   U    
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>echo ****   | docker login ghcr.io -u SanthoshiMary --password-stdin 
+Login Succeeded
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>docker tag santhoshi-portfolio:latest ghcr.io/santhoshimary/santhoshi-portfolio:latest 
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>docker push ghcr.io/santhoshimary/santhoshi-portfolio:latest 
+The push refers to repository [ghcr.io/santhoshimary/santhoshi-portfolio]
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+44136fa355b3: Waiting
+d9aae54b5831: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+e2de96513ba9: Waiting
+44136fa355b3: Waiting
+e2de96513ba9: Waiting
+88e6f00bc832: Waiting
+88e6f00bc832: Waiting
+44136fa355b3: Waiting
+e2de96513ba9: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+44136fa355b3: Waiting
+6c53d0b2a666: Waiting
+44136fa355b3: Mounted from santhoshimary/jenkinstest
+745dfb2690dd: Waiting
+6c53d0b2a666: Waiting
+6c53d0b2a666: Waiting
+745dfb2690dd: Waiting
+745dfb2690dd: Waiting
+6c53d0b2a666: Waiting
+745dfb2690dd: Waiting
+6c53d0b2a666: Waiting
+745dfb2690dd: Waiting
+6c53d0b2a666: Waiting
+745dfb2690dd: Waiting
+9a9a644fdd6a: Waiting
+88e6f00bc832: Pushed
+745dfb2690dd: Waiting
+745dfb2690dd: Waiting
+9a9a644fdd6a: Waiting
+9a9a644fdd6a: Waiting
+745dfb2690dd: Waiting
+9a9a644fdd6a: Waiting
+9a9a644fdd6a: Waiting
+9a9a644fdd6a: Waiting
+9a9a644fdd6a: Waiting
+9a9a644fdd6a: Waiting
+e76228b47809: Waiting
+64c8194480fe: Waiting
+745dfb2690dd: Pushed
+6c53d0b2a666: Pushed
+64c8194480fe: Waiting
+e76228b47809: Waiting
+e76228b47809: Waiting
+64c8194480fe: Waiting
+e76228b47809: Waiting
+64c8194480fe: Waiting
+64c8194480fe: Waiting
+e76228b47809: Waiting
+e76228b47809: Waiting
+64c8194480fe: Waiting
+e76228b47809: Waiting
+64c8194480fe: Waiting
+e76228b47809: Waiting
+64c8194480fe: Waiting
+64c8194480fe: Waiting
+e72112c14215: Waiting
+9a9a644fdd6a: Pushed
+64c8194480fe: Waiting
+e72112c14215: Waiting
+64c8194480fe: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+03057e8376ab: Waiting
+e76228b47809: Pushed
+64c8194480fe: Pushed
+e72112c14215: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+e72112c14215: Waiting
+66e0dc0d8c8c: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+e72112c14215: Waiting
+e72112c14215: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Waiting
+03057e8376ab: Waiting
+66e0dc0d8c8c: Pushed
+03057e8376ab: Pushed
+e2de96513ba9: Pushed
+d9aae54b5831: Pushed
+e72112c14215: Pushed
+latest: digest: sha256:df8fb943506a743be3cc6b90c6e18a42fc83d6855428e34853c0e13c487e9be0 size: 856
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>docker rm -f santhoshi-portfolio-jenkins  2>nul 
+santhoshi-portfolio-jenkins
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>docker run -d --name santhoshi-portfolio-jenkins -p 8084:80 santhoshi-portfolio:latest 
+3c91ca9a915906d3fc06b08021d0041174f523385e2f98efaa6becc42b150309
+
+C:\ProgramData\Jenkins\.jenkins\workspace\demo-integration-git-docker>exit 0 
+Finished: SUCCESS
